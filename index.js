@@ -3,17 +3,6 @@ const app = express();
 const { where } = require('sequelize');
 const conexao = require('./database/bancodados');
 
-const Processo = require('./controle_processo/Processo');
-const Arquivo = require('./cont_arquivo/Arquivo');
-const Categoria = require('./cont_categoria/Categoria');
-const Evento = require('./controle_evento/Evento');
-const ProcessoArq = require('./controle_ProcessoArquivo/ProcessoArquivo');
-
-const ControleCategoria = require('./cont_categoria/controleCategoria');
-const ControleArquivo = require('./cont_arquivo/controleArquivo');
-const ControleProcesso = require('./controle_processo/controleProcesso');
-const ControleEvento = require('./controle_evento/controleEvento');
-
 const User = require('./cont_user/User')
 const UserController = require('./cont_user/UserController')
 const session = require('express-session')
@@ -31,8 +20,6 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
   }));
-
-app.use("/",ControleArquivo,ControleCategoria,ControleProcesso,ControleEvento);
 
 app.set("view engine","ejs");
 
@@ -89,20 +76,6 @@ app.get("/",(req,res) =>{
         res.render("home");
     })
 
-app.get("/equipe",(req,res) =>{
-    res.render("equipe");
-})
-
-app.get("/pesquisa/:slug",(req,res) =>{
-    var slug = req.params.slug;
-    Arquivo.findOne({
-        where:{
-            slug:slug
-        }
-    }).then((arquivo)=>{
-        res.render("ler_arquivo", {arquivo})
-    })
-})
 
 conexao.authenticate().then(() =>{
     console.log("Conexão com o banco sucesso")
