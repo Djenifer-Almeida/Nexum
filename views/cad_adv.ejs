@@ -1,0 +1,72 @@
+<%- include("partials/header.ejs") %>
+<%- include('partials/sidebar2.ejs') %>
+<div class="container mt-5">
+    
+<div class="card">
+    <div class="card-header">
+        <h2>Finalizar Cadastro </h2>
+    </div>
+    <div class="card-body">
+        <form action="/users/cadadvogado" method="POST">
+           
+            <div class="mb-4">
+                <div class="mb-3">
+                    <label for="login" class="form-label">Login:</label>
+                    <input type="text" class="form-control" id="login" name="login" required placeholder="Digite o login">
+                </div>
+
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required placeholder="Digite a senha">
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo:</label>
+                    <select name="tipo" id="tipo" class="form-control">
+                        <option value="advogado">Advogado</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+            </div>
+
+            <div >
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<%- include("partials/footer.ejs") %>
+
+<style>
+    
+    .alert {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    
+    @media (max-width: 767px) {
+        .custom-container {
+            padding: 20px;
+        }
+
+        .form-label {
+            font-size: 14px;
+        }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+    }
+</style>

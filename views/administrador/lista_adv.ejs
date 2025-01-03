@@ -1,0 +1,155 @@
+<%- include ("../partials/header.ejs") %>
+    <%- include('../partials/sidebar2.ejs') %>
+        <div class="container mt-4">
+
+            <br>
+            <h2>Advogado</h2>
+            <a class="btn btn-success mt-4" href="/adm"><i class='bx bx-user-plus'></i> Novo</a>
+            <div class="table-responsive">
+                <table class="table table-custom mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">OAB</th>
+                            <th scope="col">Data Registro</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% advogado.forEach((advs)=> { %>
+                            <tr>
+                                <td>
+                                    <%= advs.id_advogado %>
+                                </td>
+                                <td>
+                                    <%= advs.nome %>
+                                </td>
+                                <td>
+                                    <%= advs.email %>
+                                </td>
+                                <td>
+                                    <%= advs.oab %>
+                                </td>
+                                <td>
+                                    <% const DataRegistro=advs.data_registro.toLocaleDateString('pt-BR', {
+                                        day: '2-digit' , month: '2-digit' , year: 'numeric' }); const
+                                        HoraRegistro=advs.data_registro.toLocaleTimeString('pt-BR', { hour: '2-digit' ,
+                                        minute: '2-digit' }); %>
+                                        <%= `${DataRegistro} ${HoraRegistro}` %>
+                                </td>
+
+                                <td>
+                                    <a href="/adm/advinfo/<%= advs.id_advogado %>" class="btn btn-primary">
+                                        <i class="bi bi-eye-fill"></i> Visualizar
+                                    </a>
+
+                                    <button class="btn btn-danger" onclick="confirmaDeleta('<%= advs.id_advogado %>')">
+                                        <i class="bi bi-trash-fill"></i> Deletar
+                                    </button>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza de que deseja excluir este advogado? Esta ação não pode ser desfeita.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="deleteForm" method="POST" action="/adm/deletadv" style="display: inline;">
+                            <input type="hidden" id="deleteId" name="id" value="" />
+                            <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .table-custom {
+                width: 100%;
+                margin-top: 20px;
+                border: 1px solid #dee2e6;
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: #f9f9f9;
+                border-collapse: collapse;
+            }
+
+            .table-custom thead {
+                background-color: #F7C873;
+                color: black;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .table-custom th,
+            .table-custom td {
+                padding: 10px;
+                text-align: center;
+                vertical-align: middle;
+                border-bottom: 1px solid #dee2e6;
+                word-wrap: break-word;
+                max-width: 150px;
+            }
+
+            .table-custom tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .btn {
+                display: inline-block;
+                font-weight: 400;
+                cursor: pointer;
+                padding: 8px 12px;
+                font-size: 14px;
+                border-radius: 5px;
+                text-decoration: none;
+                color: white;
+                border: none;
+                transition: all 0.3s ease;
+            }
+
+            @media (max-width: 768px) {
+                .table-responsive {
+                    overflow-x: auto;
+                }
+
+                .table-custom th,
+                .table-custom td {
+                    font-size: 12px;
+                    padding: 8px;
+                    white-space: nowrap;
+                }
+
+                .btn {
+                    font-size: 12px;
+                    padding: 6px 10px;
+                }
+            }
+        </style>
+
+        <%- include ("../partials/footer.ejs") %>
+
+            <script>
+
+                function confirmaDeleta(id) {
+
+                    document.getElementById('deleteId').value = id;
+
+                    var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                    deleteModal.show();
+                }
+            </script>

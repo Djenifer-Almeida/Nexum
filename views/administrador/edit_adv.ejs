@@ -1,0 +1,88 @@
+<%- include("../partials/header.ejs") %>
+<%- include('../partials/sidebar2.ejs') %>
+<div class="container mt-5">
+    
+    <div class="card">
+        <div class="card-header">
+            <h3>Editar Advogado</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/adm/updateadv">
+
+                <input type="hidden" name="id_advogado" value="<%= advogado.id_advogado %>">
+
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="<%= advogado.nome %>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="data_nac" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="data_nac" name="data_nac" value="<%= advogado.data_nac %>" required>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= advogado.email %>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="telefone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" value="<%= advogado.telefone %>" required>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="oab" class="form-label">OAB</label>
+                            <input type="text" class="form-control" id="oab" name="oab" value="<%= advogado.oab %>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" name="endereco" value="<%= advogado.endereco %>" required>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade" value="<%= advogado.cidade %>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="estado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" name="estado" value="<%= advogado.estado %>" required>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div >
+                    <button type="submit" class="btn btn-success me-2">Salvar</button>
+                    <a href="/adm/advinfo/<%= advogado.id_advogado %>" class="btn btn-danger" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>
